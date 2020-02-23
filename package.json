@@ -1,0 +1,19 @@
+{
+  "name": "cmos",
+  "version": "1.0.0",
+  "description": "Computer Management Operations System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galantelorenzo97/CMOS.git"
+  },
+  "author": "Engr. Lorenzo Galante",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/galantelorenzo97/CMOS/issues"
+  },
+  "homepage": "https://github.com/galantelorenzo97/CMOS#readme"
+}
