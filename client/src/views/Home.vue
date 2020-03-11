@@ -1,18 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <section class="container">
+    <div class="hero">
+    <h1 class="title">Welcome to CMOS</h1>
+    <!-- CREATE A LOGIN DIALOG AND PUT IT HERE -->
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// Only commenting import statements so that I can remember how to import stuff properly
+//import CMOS from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    //HelloWorld
   }
 }
 </script>
