@@ -1,8 +1,10 @@
 <template>
   <section class="container">
     <div class="hero">
-    <h1 class="title">Welcome to CMOS</h1>
-    <!-- CREATE A LOGIN DIALOG AND PUT IT HERE -->
+      <h1 class="title">Welcome to CMOS</h1>
+      <!-- CREATE A LOGIN DIALOG AND PUT IT HERE -->
+    </div>
+  </section>
 </template>
 
 <script>
