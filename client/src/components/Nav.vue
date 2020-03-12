@@ -22,8 +22,8 @@
     <div :class="{ 'is-active-menu':isOpen }" class="navbar-menu">
       <div class="navbar-start">
         <router-link to="/" class="navbar-item" active-class="is-enabled" exact>Home</router-link>
-        <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link>
-<!--    <router-link to="Game" class="navbar-item" active-class="is-enabled">Game</router-link>   -->
+        <!-- <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link> -->
+        <router-link to="Computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
 <!--
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">More</a>
