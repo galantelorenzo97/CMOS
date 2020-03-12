@@ -3,6 +3,7 @@
  * Written by Engr. Lorenzo Galante
  */
 import {Locations} from './Locations';
+import { CurrentUser } from "./Users";
 
 export const Computer_Inventory = {
     "Active":[

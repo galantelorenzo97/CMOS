@@ -43,7 +43,7 @@
       login(){
         try {
           Login(this.email, this.password);
-          this.$router.push('/game');
+          this.$router.push('/computers');
         } catch (error) {
           this.error = error;
         }
