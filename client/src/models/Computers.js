@@ -4,32 +4,29 @@
  */
 import {Locations} from './Locations';
 
-const Computer_Inventory = [
+export const Computer_Inventory = {
+    "Active":[
     {
         Service_Tag: "FNG123",
         Assigned_User: "Engr. Lorenzo Galante",
-        Location: Locations[1],
-        Status: 1
+        Location: Locations[1]
     },
     {
         Service_Tag: "BH5270",
         Assigned_User: "Rabbi Moshe Plotkin",
-        Location: Locations[0],
-        Status: 1
-    },
-    {
+        Location: Locations[0]
+    }],
+    "Retired":[{
         Service_Tag: "RET234",
         Assigned_User: "",
-        Location: Locations[2],
-        Status: -1
-    },
-    {
+        Location: Locations[2]
+    }],
+    "Inactive":[{
         Service_Tag: "INA000",
         Assigned_User: "",
-        Location: Locations[2],
-        Status: 0
-    }
-];
+        Location: Locations[2]
+    }]
+};
 
 //returns a whole computer based on the service tag
 export function getComputer(service_tag)
@@ -59,21 +56,4 @@ export function getComputersByLocation(location)
     if (computer_list.length == 0) throw Error("No computers in location specified");
 
     return computer_list;
-}
-
-//puts the computer status in human terms
-export function verbalizeStatus(computer)
-{
-    if (computer.Status == 0)
-    {
-        return "Inactive";
-    }
-    else if (computer.Status == 1)
-    {
-        return "Active";
-    }
-    else
-    {
-        return "Retired";
-    }
 }

@@ -17,7 +17,7 @@
         @click="getComputersByLocation()"
       >{{location}}</a>
     </p>
-    <a class="panel-block" v-for="(computer, index) in currentWorkingComputerList" :key="computer.Service_Tag">
+    <a class="panel-block" v-for="(computer) in currentWorkingComputerList" :key="computer.Service_Tag">
       <span class="panel-icon">
         <i class="fas fa-desktop" aria-hidden="true"></i>
       </span>
@@ -72,7 +72,7 @@ import {
 } from "../models/Computers";
 import { Locations } from "../models/Locations";
 
-const currentWorkingComputerList = [];
+let currentWorkingComputerList = [];
 const currentLocation = Locations[2];
 
 export default {
@@ -84,7 +84,8 @@ export default {
   }),
   methods: {
     getComputersByLocation() {
-      currentWorkingComputerList.push(getComputersByLocation(currentLocation));
+      currentWorkingComputerList = getComputersByLocation(currentLocation);
+      console.log(currentWorkingComputerList);
     }
   }
 };

@@ -5,7 +5,10 @@
 const Users = 
 [
     {
-        Name: "Lorenzo", Password: "SamplePassword", Email: "galantel1@hawkmail.newpaltz.edu"
+        Name: "Lorenzo", 
+        Password: "SamplePassword", 
+        Email: "galantel1@hawkmail.newpaltz.edu",
+        Admin: 1
     },
 ];
 
