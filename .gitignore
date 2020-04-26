@@ -1,4 +1,8 @@
 
+##SQL connection files (Engr. Lorenzo Galante)##
+sqlconnect.js
+
+
 # Created by https://www.gitignore.io/api/vue,node,dotenv,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=vue,node,dotenv,visualstudiocode
 
