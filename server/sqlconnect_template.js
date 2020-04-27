@@ -1,3 +1,9 @@
+/*
+    Developed By Engr. Lorenzo Galante
+    Use this template to connect to a database
+    For MySQL the first query MUST be "USE your_database_name;"
+*/
+
 const express = require('express');
 const mysql = require('mysql');
 
