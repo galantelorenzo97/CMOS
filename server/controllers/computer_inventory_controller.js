@@ -10,30 +10,76 @@ const computers = require('../models/computers');
 });*/
 
 router
+    //ALL COMPUTERS, NO VERBOSE
     .get('/', (req, res) => {
         db.con.query(computers.allComputersQuery, function (err, result) {
             if (err) throw err;
-            res.send({result: result});
-    });
-})  .get('/:serviceTag', (req, res) => {
-        const query = "SELECT * FROM Computer_Inventory_T WHERE Service_Tag = \"" + req.params.serviceTag + "\"";
+            res.send({ result: result });
+        });
+    })
+    //search by Column and Value, NO VERBOSE
+    .get('/search/:colName/:valueToCheck', (req, res) => {
+        const query = "SELECT * FROM Computer_Inventory_T WHERE " + req.params.colName + " = \"" + req.params.valueToCheck + "\"";
         db.con.query(query, function (err, result) {
             if (err) throw err;
-            res.send({result: result});
-    });
-})  .get('/active' , (req,res) => {
+            res.send({ result: result });
+        });
+    })
+    //VERBOSE Search
+    //DEFECTIVE
+/*    .get('verbose/search/:colName/:valueToCheck', (req, res) => {
+        const query = verboseColValCheck(req.params.colName, req.params.valueToCheck);
+        console.log(query);
+        db.con.query(verboseColValCheck(req.params.colName, req.params.valueToCheck), function (err, result) {
+            if (err) throw err;
+            res.send({ result: result });
+        });
+    })*/
+    //ALL computers, VERBOSE
+    .get('/verbose', (req, res) => {
+        db.con.query(computers.verboseJoinQuery, function (err, result) {
+            if (err) throw err;
+            res.send({ result: result });
+        });
+    })
+    //VERBOSE Search by Computer ID
+    .get('/verbose/search/:computerID', (req, res) => {
+        db.con.query(computers.singleVerboseComputerQuery(req.params.computerID), function (err, result) {
+            if (err) throw err;
+            res.send({ result: result });
+        });
+    })
+    //ALL ACTIVE COMPUTERS, NO VERBOSE
+    .get('/active', (req, res) => {
         const query = "SELECT * FROM Computer_Inventory_T WHERE Status_ID = 1";
         db.con.query(query, function (err, result) {
             if (err) res.status(500).send("Error in Computer controller");
-            res.send({result: result});
-    });
-})
-    .get('/stored' , (req,res) => {
+            res.send({ result: result });
+        });
+    })
+    //ALL ACTIVE COMPUTERS, VERBOSE
+    .get('/verbose/active', (req, res) => {
+        const query = computers.verboseActiveQuery;
+        db.con.query(query, function (err, result) {
+            if (err) res.status(500).send("Error in Computer controller");
+            res.send({ result: result });
+        });
+    })
+    //ALL STORED COMPUTERS, NO VERBOSE
+    .get('/stored', (req, res) => {
         const query = "SELECT * FROM Computer_Inventory_T WHERE Status_ID = 0";
         db.con.query(query, function (err, result) {
             if (err) res.status(500).send("Error in Computer controller");
-            res.send({result: result});
+            res.send({ result: result });
+        });
+    })
+    //ALL STORED COMPUTERS, VERBOSE
+    .get('/verbose/stored', (req, res) => {
+        const query = computers.verboseStoredQuery;
+        db.con.query(query, function (err, result) {
+            if (err) res.status(500).send("Error in Computer controller");
+            res.send({ result: result });
+        });
     });
-});
 
 module.exports = router;
