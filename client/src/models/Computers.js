@@ -2,35 +2,27 @@
  * Computers Model
  * Written by Engr. Lorenzo Galante
  */
-import {Locations} from './Locations';
-import { CurrentUser } from "./Users";
+//import {Locations} from './Locations';
+//import { CurrentUser } from "./Users";
 
-export const Computer_Inventory = {
-    "Active":[
-    {
-        Service_Tag: "FNG123",
-        Assigned_User: "Engr. Lorenzo Galante",
-        Location: Locations[1]
-    },
-    {
-        Service_Tag: "BH5270",
-        Assigned_User: "Rabbi Moshe Plotkin",
-        Location: Locations[0]
-    }],
-    "Retired":[{
-        Service_Tag: "RET234",
-        Assigned_User: "",
-        Location: Locations[2]
-    }],
-    "Inactive":[{
-        Service_Tag: "INA000",
-        Assigned_User: "",
-        Location: Locations[2]
-    }]
-};
+import myFetch from "./myFetch"
 
+export let ActiveComputerList = [];
+export let StoredComputerList = [];
+
+export default {
+    ActiveComputerList : [],
+    getCompleteComputerList() {
+        myFetch("/computers")
+        .then(x=> {
+            this.ActiveComputerList = x.result;
+            console.log(x.result);
+            console.log(this.ActiveComputerList);
+        });
+    }
+}
 //returns a whole computer based on the service tag
-export function getComputer(service_tag)
+/*export function getComputer(service_tag)
 {
     const computer = Computer_Inventory.find(computerx => computerx.Service_Tag == service_tag);
 
@@ -57,4 +49,4 @@ export function getComputersByLocation(location)
     if (computer_list.length == 0) throw Error("No computers in location specified");
 
     return computer_list;
-}
+}*/
