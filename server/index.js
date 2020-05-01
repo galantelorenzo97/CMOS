@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const computerController = require('./controllers/computer_inventory_controller');
-//const usersController = require('./controllers/users');
+const usersController = require('./controllers/users_controller');
 
 //const sqlconnect = require('./sqlconnect');
 
@@ -30,7 +30,7 @@ app
     .use(express.static(__dirname + '/../client/dist'))
     .get('/', (req, res) => res.send('This is the CMOS Backend!'))
     .use('/computers', computerController)
-    //.use('/users', usersController)
+    .use('/users', usersController)
 
     /*.use((req, res) => {
         const homePath = path.join(__dirname, '/../client/dist/index.html');
