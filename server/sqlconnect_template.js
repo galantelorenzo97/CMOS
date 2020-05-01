@@ -5,27 +5,34 @@
 */
 
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2'); //DO NOT USE mysql. mysql doesn't work! You'll thank me later!
+
 
 const con = mysql.createConnection(
     {
         host: "",
         user: "",
-        password: ""
+        password: "",
+        database: ""
     }
 );
-
-function myQuery (sqlQuery) {
-    con.query(sqlQuery, function (err, result) {
-        if (err) throw err;
-        console.log("Result: " + result);
-      });
-}
 
 con.connect(
     function(err) 
     {
         if (err) throw err;
         console.log("Connected");
-        myQuery("");
 });
+
+function disconnectDB()
+{
+    con.end( function (err) {
+        if (err) throw err;
+        console.log("Disconnected");
+    })
+}
+
+module.exports = {
+    disconnectDB: disconnectDB,
+    con: con
+};
