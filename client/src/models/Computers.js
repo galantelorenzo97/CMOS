@@ -12,41 +12,18 @@ export let StoredComputerList = [];
 
 export default {
     ActiveComputerList : [],
+    StoredComputerList : [],
     getCompleteComputerList() {
-        myFetch("/computers")
+        myFetch("/computers/verbose/active")
         .then(x=> {
             this.ActiveComputerList = x.result;
-            console.log(x.result);
-            console.log(this.ActiveComputerList);
         });
+        myFetch("/computers/verbose/stored")
+        .then(x=> {
+            this.StoredComputerList = x.result;
+        });
+    },
+    getLength(list) {
+        return list.length;
     }
 }
-//returns a whole computer based on the service tag
-/*export function getComputer(service_tag)
-{
-    const computer = Computer_Inventory.find(computerx => computerx.Service_Tag == service_tag);
-
-    if (!computer) throw Error("Computer not found, check service tag");
-
-    return computer;
-}
-
-//returns the index of the computer in question
-export function getComputerIndex(service_tag)
-{
-    const computer = getComputer(service_tag);
-
-    const computer_Index = Computer_Inventory.findIndex(computer);
-
-    return computer_Index;
-}
-
-//returns computer by location
-export function getComputersByLocation(location)
-{
-    const computer_list = Computer_Inventory.filter(computerx => computerx.Location == location);
-
-    if (computer_list.length == 0) throw Error("No computers in location specified");
-
-    return computer_list;
-}*/

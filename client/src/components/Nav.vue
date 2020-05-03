@@ -21,7 +21,7 @@
 
     <div :class="{ 'is-active-menu':isOpen }" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item" active-class="is-enabled" exact>Home</router-link>
+        <router-link to="/" class="navbar-item" active-class="is-enabled" exact>Dashboard</router-link>
         <!-- <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link> -->
         <router-link to="Computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
 <!--

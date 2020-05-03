@@ -7,6 +7,7 @@ SELECT
     Computer_Inventory_T.Computer_ID,
     Users_T.Name AS User,
     Locations_T.Location_Name AS Location,
+    Computer_Inventory_T.Service_Tag,
     Processors_T.Name AS Processor,
     Operating_Systems_T.Name AS OS_Name,
     Computer_Status_T.Verbose AS Status
@@ -26,6 +27,7 @@ SELECT
     Computer_Inventory_T.Computer_ID,
     Users_T.Name AS User,
     Locations_T.Location_Name AS Location,
+    Computer_Inventory_T.Service_Tag,
     Processors_T.Name AS Processor,
     Operating_Systems_T.Name AS OS_Name,
     Computer_Status_T.Verbose AS Status
@@ -78,6 +80,7 @@ function singleVerboseComputerQuery(computerID)
     WHERE Computer_Inventory_T.Computer_ID =` + computerID + `
     GROUP BY Computer_Inventory_T.Computer_ID;
     `
+    console.log(query);
     return query;
 }
 
@@ -101,6 +104,7 @@ function verboseColValCheck(col, val)
     WHERE Computer_Inventory_T.` + col +` = ` + val + `
     GROUP BY Computer_Inventory_T.Computer_ID;
     `
+    console.log(query);
     return query;
 }
 

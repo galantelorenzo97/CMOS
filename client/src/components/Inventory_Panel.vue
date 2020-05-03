@@ -11,19 +11,31 @@
           
         </p>
       </div>-->
-      <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
-        <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        {{computer.Computer_ID}} {{computer.Service_Tag}}
-      </a>
-      <label class="panel-block">
+      
+
+      <div v-if="activeList == true">
+        <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
+          <span class="panel-icon">
+            <i class="fas fa-book" aria-hidden="true"></i>
+          </span>
+          {{computer.Computer_ID}} {{computer.Service_Tag}} {{computer.Location}}
+        </a>
+      </div>
+      <div v-else>
+        <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
+          <span class="panel-icon">
+            <i class="fas fa-book" aria-hidden="true"></i>
+          </span>
+          {{computer.Computer_ID}} {{computer.Service_Tag}}
+        </a>
+      </div>
+      <!-- <label class="panel-block">
         <input type="checkbox" />
         remember me
       </label>
       <div class="panel-block">
         <button class="button is-link is-outlined is-fullwidth">Reset all filters</button>
-      </div>
+      </div> -->
     </nav>
   </section>
 </template>
@@ -43,6 +55,10 @@ data: () => ({
           default: function() {
               return inventoryList;
           }
+      },
+      activeList: {
+        type: Boolean,
+        default: false
       }
   },
   events: {}

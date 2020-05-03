@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Computers from '../views/Computers.vue'
 import Login from '../views/Login.vue'
+import Dashboard from '../views/Dashboard.vue'
 import { CurrentUser } from '../models/Users'
 
 Vue.use(VueRouter)
@@ -10,8 +11,9 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: {IsSecret: true}
   },
   {
     path: '/about',

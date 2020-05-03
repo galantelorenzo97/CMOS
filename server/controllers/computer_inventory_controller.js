@@ -26,15 +26,14 @@ router
         });
     })
     //VERBOSE Search
-    //DEFECTIVE
-/*    .get('verbose/search/:colName/:valueToCheck', (req, res) => {
-        const query = verboseColValCheck(req.params.colName, req.params.valueToCheck);
+    .get('/verbose/search/byNameVal/:colName/:valueToCheck', (req, res) => {
+        const query = computers.verboseColValCheck(req.params.colName, req.params.valueToCheck);
         console.log(query);
-        db.con.query(verboseColValCheck(req.params.colName, req.params.valueToCheck), function (err, result) {
+        db.con.query(query, function (err, result) {
             if (err) throw err;
             res.send({ result: result });
         });
-    })*/
+    })
     //ALL computers, VERBOSE
     .get('/verbose', (req, res) => {
         db.con.query(computers.verboseJoinQuery, function (err, result) {
@@ -43,7 +42,7 @@ router
         });
     })
     //VERBOSE Search by Computer ID
-    .get('/verbose/search/:computerID', (req, res) => {
+    .get('/verbose/search/byComputerID/:computerID', (req, res) => {
         db.con.query(computers.singleVerboseComputerQuery(req.params.computerID), function (err, result) {
             if (err) throw err;
             res.send({ result: result });
