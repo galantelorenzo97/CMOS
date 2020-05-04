@@ -2,8 +2,10 @@
   <section class="container">
     <div class="columns has-text-centered">
       <div class="column">
+        <!-- ACTIVE HELPDESK TICKETS HERE -->
       </div>
       <div class="column">
+        <!-- PRINTER TONER STATUS HERE -->
       </div>
       <div class="column">
         <div v-if="activeLength > 0">
@@ -49,32 +51,21 @@ export default {
       this.storedLength = completeComputerList[1].length;
       console.log("beforeCreate exec");
       await Computers.getCompleteComputerList();
-     // Computers.getLength();
-      //this.goodlength;
-      //this.methods(goodlength);
     },
     async created() {
       console.log("created exec")
       await Computers.getCompleteComputerList();
-      //Computers.getLength();
     },
     updated() {
-        //Computers.getCompleteComputerList();
     },
     components: {
         InventoryPanel
     },
     computed: {
-      activeLengthCheck: function () {
-        return (this.Computers.ActiveComputerList.length > 0);
-      }
+      
     },
     methods: {
-      goodlength: function ()
-      {
-        this.activeGood = (this.Computers.ActiveComputerList.length > 0);
-        this.storedGood = (this.Computers.StoredComputerList.length > 0);
-      }
+      
     }
 };
 </script>
