@@ -14,19 +14,19 @@
       
 
       <div v-if="activeList == true">
-        <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
+        <a v-on:click="renderModal()" v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
           <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
+            <i class="fas fa-desktop" aria-hidden="true"></i>
           </span>
-          {{computer.Computer_ID}} {{computer.Service_Tag}} {{computer.Location}}
+          {{computer.Computer_ID}} | {{computer.Service_Tag}} | {{computer.Location}}
         </a>
       </div>
       <div v-else>
         <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
           <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
+            <i class="fas fa-desktop" aria-hidden="true"></i>
           </span>
-          {{computer.Computer_ID}} {{computer.Service_Tag}}
+          {{computer.Computer_ID}} | {{computer.Service_Tag}}
         </a>
       </div>
       <!-- <label class="panel-block">
@@ -37,13 +37,19 @@
         <button class="button is-link is-outlined is-fullwidth">Reset all filters</button>
       </div> -->
     </nav>
+    <InventoryPanelModal v-model="ModalActive" v-on:close-modal="closeModal()"></InventoryPanelModal>
   </section>
 </template>
 
 <script>
+import InventoryPanelModal from "./Inventory_Panel_Modal"
 export default {
-data: () => ({
-    }),
+  data: () => ({
+    ModalActive: false
+      }),
+  components: {
+    InventoryPanelModal
+  },
   props: {
       listTitle: {
           type: String,
@@ -61,7 +67,26 @@ data: () => ({
         default: false
       }
   },
-  events: {}
+  methods: {
+    postAlert: function (msg) {
+      alert(msg);
+    },
+    renderModal: function() {
+      console.log("renderModal() called")
+      console.log(this.ModalActive)
+      this.ModalActive = true;
+      console.log(this.ModalActive)
+    },
+    closeModal: function() {
+      console.log("CloseModal() called");
+      console.log(this.ModalActive)
+      this.ModalActive = false;
+      console.log(this.ModalActive)
+    }
+  },
+  events: {
+
+  }
 };
 </script>
 
