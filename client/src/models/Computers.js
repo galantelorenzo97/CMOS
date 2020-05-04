@@ -1,6 +1,10 @@
 /**
  * Computers Model
  * Written by Engr. Lorenzo Galante
+ * 
+ * Many Thanks to my friend Vinston Guillaume for the help with Promises,
+ * and a big thanks to my friend Anthony Allwood (@AnthonyAllwood) for putting 
+ * me in touch with him!
  */
 //import {Locations} from './Locations';
 //import { CurrentUser } from "./Users";
