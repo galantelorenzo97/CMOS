@@ -14,15 +14,15 @@
       
 
       <div v-if="activeList == true">
-        <a v-on:click="renderModal()" v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
+        <a v-on:click="renderModal(computer)" v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
           <span class="panel-icon">
             <i class="fas fa-desktop" aria-hidden="true"></i>
           </span>
-          {{computer.Computer_ID}} | {{computer.Service_Tag}} | {{computer.Location}}
+          {{computer.Computer_ID}} | {{computer.User}} | {{computer.Location}}
         </a>
       </div>
       <div v-else>
-        <a v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
+        <a v-on:click="renderModal(computer)" v-for="computer in inventoryList" :key="computer.Computer_ID" class="panel-block">
           <span class="panel-icon">
             <i class="fas fa-desktop" aria-hidden="true"></i>
           </span>
@@ -37,7 +37,11 @@
         <button class="button is-link is-outlined is-fullwidth">Reset all filters</button>
       </div> -->
     </nav>
-    <InventoryPanelModal v-model="ModalActive" v-on:close-modal="closeModal()"></InventoryPanelModal>
+    <InventoryPanelModal 
+      v-model="ModalActive"
+      :displayedComputer="SelectedComputer" 
+      v-on:close-modal="closeModal()">
+      </InventoryPanelModal>
   </section>
 </template>
 
@@ -45,7 +49,8 @@
 import InventoryPanelModal from "./Inventory_Panel_Modal"
 export default {
   data: () => ({
-    ModalActive: false
+    ModalActive: false,
+    SelectedComputer: {Computer_ID: 0}
       }),
   components: {
     InventoryPanelModal
@@ -71,17 +76,19 @@ export default {
     postAlert: function (msg) {
       alert(msg);
     },
-    renderModal: function() {
+    renderModal: function(computer) {
       console.log("renderModal() called")
-      console.log(this.ModalActive)
+      console.log(computer);
+      this.SelectedComputer = computer;
       this.ModalActive = true;
-      console.log(this.ModalActive)
+      this.$emit('update-computers')
     },
     closeModal: function() {
       console.log("CloseModal() called");
       console.log(this.ModalActive)
       this.ModalActive = false;
       console.log(this.ModalActive)
+      this.$emit('update-computers')
     }
   },
   events: {

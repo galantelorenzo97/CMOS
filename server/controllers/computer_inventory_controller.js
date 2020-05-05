@@ -79,6 +79,22 @@ router
             if (err) res.status(500).send("Error in Computer controller");
             res.send({ result: result });
         });
+    })
+    .get('/methods/storeComputer/:id', (req, res) => {
+        let query = "UPDATE Computer_Inventory_T SET Status_ID = 0, User_ID = NULL"
+        + " WHERE Computer_ID = " + req.params.id;
+        db.con.query(query, function (err, result) {
+            if (err) res.status(500).send("Computer could not be stored");
+            res.send({ result: result })
+        })
+    })
+    .get('/methods/activateComputer/:computerID/:userID', (req, res) => {
+        let query = "UPDATE Computer_Inventory_T SET Status_ID = 1, User_ID = "
+        + req.params.userID + " WHERE Computer_ID = " + req.params.computerID;
+        db.con.query(query, function (err, result) {
+            if (err) res.status(500).send("Computer could not be reactivated");
+            res.send({ result: result })
+        })
     });
 
 module.exports = router;
