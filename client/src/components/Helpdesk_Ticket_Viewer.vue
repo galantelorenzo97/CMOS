@@ -27,7 +27,7 @@
     <div v-else>
       <article class="message is-dark">
         <div class="message-body">
-          <strong>TICKET MOTHERFUCKER, CAN YOU SELECT IT!?</strong>
+          <strong>Please select a ticket</strong>
         </div>
       </article>
     </div>
