@@ -5,6 +5,7 @@ import Computers from '../views/Computers.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import { CurrentUser } from '../models/Users'
+import Helpdesk from '../views/Helpdesk'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
-    meta: {IsSecret: true}
+    meta: { IsSecret: true }
   },
   {
     path: '/about',
@@ -27,12 +28,17 @@ const routes = [
     path: '/computers',
     name: 'Computers',
     component: Computers,
-    meta: {IsSecret: true}
+    meta: { IsSecret: true }
   },
   {
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/helpdesk',
+    name: 'Helpdesk',
+    component: Helpdesk
   }
 ]
 
@@ -42,8 +48,8 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach( (to, from, next) => {
-  if ( to.meta.IsSecret && !CurrentUser ) next ("/login")
+router.beforeEach((to, from, next) => {
+  if (to.meta.IsSecret && !CurrentUser) next("/login")
   else next()
 });
 

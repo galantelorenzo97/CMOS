@@ -3,18 +3,18 @@ const router = express.Router();
 
 const db = require("../sqlconnect");
 
+const helpdesk = require('../models/helpdesk');
 /*router.use(function (req, res, next) {
     next();
 });*/
 
 router
-    //ALL COMPUTERS, NO VERBOSE
+    //ALL Helpdesk Tickets
     .get('/', (req, res) => {
-        res.status(200).send("Helpdesk Interface Home");
-        /*db.con.query(computers.allComputersQuery, function (err, result) {
+        db.con.query(helpdesk.fullTicketJoinQuery, function (err, result) {
             if (err) throw err;
             res.send({ result: result });
-        });*/
+        });
     });
 
 module.exports = router;

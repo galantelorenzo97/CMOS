@@ -23,7 +23,8 @@
       <div class="navbar-start">
         <router-link to="/" class="navbar-item" active-class="is-enabled" exact>Dashboard</router-link>
         <!-- <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link> -->
-        <router-link to="Computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
+        <router-link to="/computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
+        <router-link to="/helpdesk" class="navbar-item" active-class="is-enabled">Helpdesk</router-link>
 <!--
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">More</a>
