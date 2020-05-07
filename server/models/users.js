@@ -15,5 +15,10 @@ GROUP BY ut.User_ID;
 `
 
 module.exports = {
-    fullUserQuery
+    fullUserQuery,
+    Login(username, password) {
+        const query = "SELECT * FROM Users_T WHERE (User_Login = '" +
+        username + "' AND Plaintext_Password = '" + password + "')";
+        return query;
+    }
 }

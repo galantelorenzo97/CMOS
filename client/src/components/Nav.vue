@@ -40,13 +40,17 @@
         
       </div>
       <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
+        <div v-if="ConnectedUser == null" class="navbar-item">
+          <p>Please Log in!</p>
+          <!--<div class="buttons">
             <a class="button is-primary">
               <strong>Sign up</strong>
             </a>
             <a class="button is-light">Log in</a>
-          </div>
+          </div>-->
+        </div>
+        <div v-else class="navbar-item">
+          <p> Hello, {{ConnectedUser.result[0].Name}} </p>
         </div>
       </div>
     </div>
@@ -54,10 +58,26 @@
 </template>
 
 <script>
+import {CurrentUser} from '../models/Users';
+
 export default {
   data: () => ({
-    isOpen: false
-  })
+    isOpen: false,
+    ConnectedUser: null,
+  }),
+  beforeCreate() {
+  },
+  created() {
+    var delay = setInterval(this.poorManUpdate, 2000);
+  },
+  updated() {
+
+  },
+  methods: {
+    poorManUpdate: function () {
+      this.ConnectedUser = CurrentUser;
+    }
+  }
 };
 </script>
 

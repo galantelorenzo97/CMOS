@@ -2,6 +2,8 @@
     Move to server side once finished under guidance of Rabbi Moshe Plotkin
     @author Engr. Lorenzo Galante
 */
+/*
+
 const Users = 
 [
     {
@@ -12,14 +14,19 @@ const Users =
     },
 ];
 
+*/
+import myFetch from "./myFetch";
+
 export let CurrentUser = null;
 
-export function Login(email, password) 
+export async function Login(username, password) 
 {
-    const user = Users.find(x => x.Email == email);
-    
-    if(!user) throw Error("User not found");
-    if(user.Password != password) throw Error('Wrong Password');
-
+    const user = await myFetch('/users/login', { username, password }) ;
+    CurrentUser = user;
     return CurrentUser = user;
+}
+
+export function getCurrentUser()
+{
+    return this.CurrentUser;
 }
