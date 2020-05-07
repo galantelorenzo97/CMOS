@@ -18,7 +18,7 @@
           <span class="panel-icon has-text-danger">
             <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
           </span>
-          {{ticket.Ticket_ID}} | {{ticket.Summary}}
+          {{ticket.Ticket_ID}} | {{ticket.Summary}} | {{ticket.User}}
         </a>
       </div>
       <!-- <label class="panel-block">
@@ -51,11 +51,7 @@ export default {
           default: function() {
               return helpdeskList;
           }
-      },
-      /*activeList: {
-        type: Boolean,
-        default: false
-      }*/
+      }
   },
   methods: {
     
