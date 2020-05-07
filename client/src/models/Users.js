@@ -26,7 +26,7 @@ export async function Login(username, password)
     return CurrentUser = user;
 }
 
-export function getCurrentUser()
+export function Logout()
 {
-    return this.CurrentUser;
+    CurrentUser = null;
 }

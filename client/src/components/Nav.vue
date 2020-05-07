@@ -5,7 +5,8 @@
         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
       </a>
 
-      <a :class="{ 'is-active-menu':isOpen }" 
+      <a
+        :class="{ 'is-active-menu':isOpen }"
         @click="isOpen = !isOpen"
         role="button"
         class="navbar-burger burger"
@@ -25,7 +26,7 @@
         <!-- <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link> -->
         <router-link to="/computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
         <router-link to="/helpdesk" class="navbar-item" active-class="is-enabled">Helpdesk</router-link>
-<!--
+        <!--
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">More</a>
 
@@ -36,8 +37,7 @@
             <hr class="navbar-divider" />
             <a class="navbar-item">Report an issue</a>
           </div>
-        </div> -->
-        
+        </div>-->
       </div>
       <div class="navbar-end">
         <div v-if="ConnectedUser == null" class="navbar-item">
@@ -50,7 +50,11 @@
           </div>-->
         </div>
         <div v-else class="navbar-item">
-          <p> Hello, {{ConnectedUser.result[0].Name}} </p>
+            <p>Hello, {{ConnectedUser.result[0].Name}}</p>
+          <div class="buttons">
+            <button class="button is-danger"
+            v-on:click="logout">Sign Out</button>
+          </div>
         </div>
       </div>
     </div>
@@ -58,32 +62,33 @@
 </template>
 
 <script>
-import {CurrentUser} from '../models/Users';
+import { CurrentUser, Logout } from "../models/Users";
 
 export default {
   data: () => ({
     isOpen: false,
-    ConnectedUser: null,
+    ConnectedUser: null
   }),
-  beforeCreate() {
-  },
+  beforeCreate() {},
   created() {
     var delay = setInterval(this.poorManUpdate, 2000);
   },
-  updated() {
-
-  },
+  updated() {},
   methods: {
-    poorManUpdate: function () {
+    poorManUpdate: function() {
       this.ConnectedUser = CurrentUser;
+      console.log(this.ConnectedUser)
+    },
+    logout: function() {
+      Logout()
     }
   }
 };
 </script>
 
 <style>
-  a.is-enabled {
-    font-weight: bold;
-    color: blueviolet;
-  }
+a.is-enabled {
+  font-weight: bold;
+  color: blueviolet;
+}
 </style>
