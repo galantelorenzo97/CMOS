@@ -15,11 +15,11 @@
     </div>
     <div class="columns has-text-centered">
       <div class="column">
-        <!-- ACTIVE HELPDESK TICKETS HERE -->
+        <HelpdeskPanel listTitle="Open Tickets Assigned to You" :helpdeskList="ticketList"></HelpdeskPanel>
       </div>
-      <div class="column">
+      <!-- <div class="column"> -->
         <!-- PRINTER TONER STATUS HERE -->
-      </div>
+      <!-- </div> -->
       <div class="column">
         <div v-if="activeLength > 0">
           <InventoryPanel
@@ -56,19 +56,26 @@
 </template>
 
 <script>
+import {CurrentUser} from '../models/Users';
 import Computers from "../models/Computers";
+import Helpdesk from "../models/Helpdesk";
 import InventoryPanel from "../components/Inventory_Panel.vue";
+import HelpdeskPanel from "../components/Helpdesk_Panel.vue";
 
 export default {
   data: () => ({
     Computers,
     activeLength: Computers.ActiveListLength,
-    storedLength: Computers.StoredListLength
+    storedLength: Computers.StoredListLength,
+    ticketList: []
   }),
   async beforeCreate() {
     const completeComputerList = await Computers.getCompleteComputerList();
     this.activeLength = completeComputerList[0].length;
     this.storedLength = completeComputerList[1].length;
+
+    //const ticketsForUser = await Helpdesk.getHelpdeskTicketsAssignedToUser(1);
+    //this.ticketList = ticketsForUser[0];
   },
   async created() {
     var delayExecute = setInterval(this.updateComputers, 3000);
@@ -76,10 +83,14 @@ export default {
     const completeComputerList = await Computers.getCompleteComputerList();
     this.activeLength = completeComputerList[0].length;
     this.storedLength = completeComputerList[1].length;
+
+    const ticketsForUser = await Helpdesk.getHelpdeskTicketsAssignedToUser(CurrentUser.result[0].User_ID);
+    this.ticketList = ticketsForUser[0];
   },
   updated() {},
   components: {
-    InventoryPanel
+    InventoryPanel,
+    HelpdeskPanel
   },
   computed: {},
   methods: {
