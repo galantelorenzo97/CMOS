@@ -71,9 +71,18 @@ return `
     ORDER BY htct.Comment_ID DESC
     `
 }
+
+function postComment(ticketID, commentID, userID, Comment) {
+return `
+    INSERT INTO Helpesk_Ticket_Comments_T (Ticket_ID, Comment_ID, User_ID, Ticket_Comment, Submitted)
+        VALUES
+            (`+ticketID+`,`+commentID+`,`+userID+`,"`+Comment+`", CURRENT_TIMESTAMP);        
+    `
+}
 module.exports = {
     fullTicketJoinQuery,
     assignTicket,
     openTicketsAssignedTo,
-    getComments
+    getComments,
+    postComment
 }

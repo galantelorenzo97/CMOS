@@ -13,7 +13,7 @@ router
     .get('/', (req, res) => {
         db.con.query(helpdesk.fullTicketJoinQuery, function (err, result) {
             if (err) throw err;
-            res.send({ result: result });
+            else res.send({ result: result });
         });
     })
     .get('/assignedTo/:id', (req, res) => {
@@ -25,14 +25,21 @@ router
     .get('/methods/assignTicket/:userID/:ticketID', (req,res) => {
         db.con.query(helpdesk.assignTicket(req.params.userID, req.params.ticketID), function (err, result) {
             if (err) res.status(500).send("Error in helpdesk controller");
-            res.send({result: result})
+            else res.send({result: result})
         });
     })
     .get('/methods/getComments/:ticketID', (req, res) => {
         db.con.query(helpdesk.getComments(req.params.ticketID), function (err, result) {
             if (err) res.status(500).send("Error in helpdesk controller");
-            res.send({result: result});
+            else res.send({result: result});
         })
+    })
+    .post('/methods/postComment', (req, res) => {
+        db.con.query(helpdesk.postComment(req.body.ticketID, req.body.commentID, req.body.userID, req.body.Comment), function(err, result) {
+            if (err) res.status(500).send("Failed to post comment");
+            else res.send({result: result})
+        })
+
     })
 
 module.exports = router;

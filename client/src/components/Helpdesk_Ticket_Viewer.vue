@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div v-if="ticketToDisplay != null" class="card">
+    <div v-if="ticketToDisplay.Ticket_ID > 0" class="card">
       <div class="card-content">
         <p class="title">{{ticketToDisplay.Summary}}</p>
         <p class="subtitle">{{ticketToDisplay.User}}</p>
@@ -30,7 +30,7 @@
         </div>
       </article>
     </div>
-    <div v-if="ticketToDisplay != null" class="card">
+    <div v-if="ticketToDisplay.Ticket_ID > 0" class="card">
       <div class="card-content">
         <p class="subtitle">{{ticketToDisplay.Description}}</p>
       </div>

@@ -32,5 +32,10 @@ export default {
             });
         })
         return await Promise.all([promise]);
+    },
+    postComment(ticketID, commentID, userID, commentToPost)
+    {
+        myFetch("/helpdesk/methods/postComment", {ticketID, commentID, userID, Comment: commentToPost})
     }
+    
 }
