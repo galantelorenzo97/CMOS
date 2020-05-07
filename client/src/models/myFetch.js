@@ -24,12 +24,12 @@ export default async function myFetch(url, data) {
             headers
         });
     }
-
+    //DISABLED LOGGING
     if (response.ok) {
-        console.log({ success: true })
+        //console.log({ success: true })
         return await response.json();
     } else {
-        console.log({ success: response.statusText })
+        //console.log({ success: response.statusText })
         throw await response.json();
     }
 }
