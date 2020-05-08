@@ -77,7 +77,6 @@ export default {
   methods: {
     poorManUpdate: function() {
       this.ConnectedUser = CurrentUser;
-      console.log(this.ConnectedUser)
     },
     logout: function() {
       Logout()
