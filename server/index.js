@@ -4,6 +4,7 @@ const path = require('path');
 const computerController = require('./controllers/computer_inventory_controller');
 const usersController = require('./controllers/users_controller');
 const helpdeskController = require('./controllers/helpdesk_tickets');
+const adminController = require('./controllers/admin_controller');
 
 //const sqlconnect = require('./sqlconnect');
 
@@ -33,6 +34,7 @@ app
     .use('/computers', computerController)
     .use('/users', usersController)
     .use('/helpdesk', helpdeskController)
+    .use('/admin', adminController)
 
     /*.use((req, res) => {
         const homePath = path.join(__dirname, '/../client/dist/index.html');

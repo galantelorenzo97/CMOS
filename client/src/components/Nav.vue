@@ -26,6 +26,7 @@
         <!-- <router-link to="/about" class="navbar-item" active-class="is-enabled">About</router-link> -->
         <router-link to="/computers" class="navbar-item" active-class="is-enabled">Computers</router-link>
         <router-link to="/helpdesk" class="navbar-item" active-class="is-enabled">Helpdesk</router-link>
+        <router-link v-if="ConnectedUser && ConnectedUser.result[0].User_Type_ID == 1" to="/admin" class="navbar-item" active-class="is-enabled">Admin</router-link>
         <!--
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">More</a>

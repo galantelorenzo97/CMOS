@@ -5,7 +5,8 @@ import Computers from '../views/Computers.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import { CurrentUser } from '../models/Users'
-import Helpdesk from '../views/Helpdesk'
+import Helpdesk from '../views/Helpdesk.vue'
+import Admin from '../views/Admin.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,12 @@ const routes = [
     name: 'Helpdesk',
     component: Helpdesk,
     meta: { IsSecret: true }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    meta: { AdminOnly: true}
   }
 ]
 
@@ -51,6 +58,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.IsSecret && !CurrentUser) next("/login")
+  else if (to.meta.AdminOnly && !CurrentUser) next("/login")
+  else if (to.meta.AdminOnly && CurrentUser.User_Type_ID == 1) next("/admin")
   else next()
 });
 
