@@ -38,7 +38,8 @@ const routes = [
   {
     path: '/helpdesk',
     name: 'Helpdesk',
-    component: Helpdesk
+    component: Helpdesk,
+    meta: { IsSecret: true }
   }
 ]
 

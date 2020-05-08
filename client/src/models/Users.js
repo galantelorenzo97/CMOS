@@ -2,19 +2,7 @@
     Move to server side once finished under guidance of Rabbi Moshe Plotkin
     @author Engr. Lorenzo Galante
 */
-/*
 
-const Users = 
-[
-    {
-        Name: "Lorenzo", 
-        Password: "SamplePassword", 
-        Email: "galantel1@hawkmail.newpaltz.edu",
-        Admin: 1
-    },
-];
-
-*/
 import myFetch from "./myFetch";
 
 export let CurrentUser = null;
