@@ -36,6 +36,25 @@ export default {
     postComment(ticketID, commentID, userID, commentToPost)
     {
         myFetch("/helpdesk/methods/postComment", {ticketID, commentID, userID, Comment: commentToPost})
-    }
-    
+    },
+    disownTicket(ticketID)
+    {
+        myFetch("/helpdesk/methods/disownTicket/"+ticketID);
+    },
+    acceptTicket(userID, ticketID)
+    {
+        myFetch("/helpdesk/methods/assignTicket/"+userID+"/"+ticketID);
+    },
+    waitForUser(ticketID)
+    {
+        myFetch("/helpdesk/methods/waitForUser/"+ticketID);
+    },
+    closeTicket(ticketID)
+    {
+        myFetch("/helpdesk/methods/closeTicket/"+ticketID);
+    },    
+    reopenTicket(ticketID)
+    {
+        myFetch("/helpdesk/methods/reopenTicket/"+ticketID);
+    }    
 }

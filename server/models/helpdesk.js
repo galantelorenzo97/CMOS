@@ -79,10 +79,37 @@ return `
             (`+ticketID+`,`+commentID+`,`+userID+`,"`+Comment+`", CURRENT_TIMESTAMP);        
     `
 }
+
+function disownTicket(ticketID)
+{
+    return "UPDATE Helpdesk_Tickets_T SET Assigned_User_ID = NULL, Status_ID = 0" +
+            " WHERE Ticket_ID = " + ticketID;
+}
+
+function waitForUser(ticketID)
+{
+    return "UPDATE Helpdesk_Tickets_T SET Status_ID = 2" +
+            " WHERE Ticket_ID = " + ticketID;
+}
+
+function closeTicket(ticketID)
+{
+    return "UPDATE Helpdesk_Tickets_T SET Status_ID = 3" +
+            " WHERE Ticket_ID = " + ticketID;
+}
+function reopenTicket(ticketID)
+{
+    return "UPDATE Helpdesk_Tickets_T SET Status_ID = 1" +
+            " WHERE Ticket_ID = " + ticketID;
+}
 module.exports = {
     fullTicketJoinQuery,
     assignTicket,
     openTicketsAssignedTo,
     getComments,
-    postComment
+    postComment,
+    disownTicket,
+    waitForUser,
+    closeTicket,
+    reopenTicket
 }

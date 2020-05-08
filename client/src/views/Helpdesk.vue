@@ -11,8 +11,19 @@
         <!-- Helpdesk Closed Ticket Panel Here -->
       </div>
       <div class="column is-two-thirds">
-        <TicketViewer :ticketToDisplay="currentHelpdeskTicket"></TicketViewer>
-        <Comments v-on:update-comments="updateComments" :commentList="currentCommentList" :ticketID="currentHelpdeskTicket.Ticket_ID"></Comments>
+        <TicketViewer
+          v-on:disown-ticket="disownTicket"
+          v-on:accept-ticket="acceptTicket"
+          v-on:wait-for-user="waitForUser"
+          v-on:close-ticket="closeTicket"
+          v-on:reopen-ticket="reopenTicket"
+          :ticketToDisplay="currentHelpdeskTicket"
+        ></TicketViewer>
+        <Comments
+          v-on:update-comments="updateComments"
+          :commentList="currentCommentList"
+          :ticketID="currentHelpdeskTicket.Ticket_ID"
+        ></Comments>
       </div>
     </div>
   </section>
@@ -30,7 +41,8 @@ export default {
   data: () => ({
     currentHelpdeskTicket: { ticket_ID: 0 },
     helpdeskTicketList: [],
-    currentCommentList: []
+    currentCommentList: [],
+    CurrentUser
   }),
   components: {
     HelpdeskPanel,
@@ -51,6 +63,48 @@ export default {
     updateComments: async function(ticket_ID) {
       const commentListPromise = await Helpdesk.getComments(ticket_ID);
       this.currentCommentList = commentListPromise[0];
+    },
+    disownTicket: async function(ticket_ID) {
+      Helpdesk.disownTicket(ticket_ID);
+      this.currentHelpdeskTicket.Assigned_User = null;
+      this.currentHelpdeskTicket.Status_ID = 0;
+      const completeHelpdeskTickets = await Helpdesk.getAllHelpdeskTickets();
+      /*this.$set(this.helpdeskTicketList, completeHelpdeskTickets[0]);
+      this.$set(this.currentHelpdeskTicket, this.helpdeskTicketList[ticket_ID]);*/
+      this.updateViewer(this.currentHelpdeskTicket);
+    },
+    acceptTicket: async function(user_ID, ticket_ID) {
+      Helpdesk.acceptTicket(user_ID, ticket_ID);
+      this.currentHelpdeskTicket.Assigned_User = CurrentUser.result[0].User_ID;
+      this.currentHelpdeskTicket.Status_ID = 1;
+      const completeHelpdeskTickets = await Helpdesk.getAllHelpdeskTickets();
+      /*this.$set(this.helpdeskTicketList, completeHelpdeskTickets[0]);
+      this.$set(this.currentHelpdeskTicket, this.helpdeskTicketList[ticket_ID]);*/
+      this.updateViewer(this.currentHelpdeskTicket);
+    },
+    waitForUser: async function(ticket_ID) {
+      Helpdesk.waitForUser(ticket_ID);
+      this.currentHelpdeskTicket.Status_ID = 2;
+      const completeHelpdeskTickets = await Helpdesk.getAllHelpdeskTickets();
+      /*this.$set(this.helpdeskTicketList, completeHelpdeskTickets[0]);
+      this.$set(this.currentHelpdeskTicket, this.helpdeskTicketList[ticket_ID]);*/
+      this.updateViewer(this.currentHelpdeskTicket);
+    },
+    closeTicket: async function(ticket_ID) {
+      Helpdesk.closeTicket(ticket_ID);
+      this.currentHelpdeskTicket.Status_ID = 3;
+      const completeHelpdeskTickets = await Helpdesk.getAllHelpdeskTickets();
+      /*this.$set(this.helpdeskTicketList, completeHelpdeskTickets[0]);
+      this.$set(this.currentHelpdeskTicket, this.helpdeskTicketList[ticket_ID]);*/
+      this.updateViewer(this.currentHelpdeskTicket);
+    },
+    reopenTicket: async function(ticket_ID) {
+      Helpdesk.closeTicket(ticket_ID);
+      this.currentHelpdeskTicket.Status_ID = 1;
+      const completeHelpdeskTickets = await Helpdesk.getAllHelpdeskTickets();
+      /*this.$set(this.helpdeskTicketList, completeHelpdeskTickets[0]);
+      this.$set(this.currentHelpdeskTicket, this.helpdeskTicketList[ticket_ID]);*/
+      this.updateViewer(this.currentHelpdeskTicket);
     }
   },
   async beforeCreate() {

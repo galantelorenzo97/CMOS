@@ -1,10 +1,10 @@
 <template>
   <div class="tags has-addons">
     <span class="tag">Status</span>
-    <span v-if="statusID == 0" class="tag is-black">{{statusVerbose}}</span>
-    <span v-else-if="statusID == 1" class="tag is-success">{{statusVerbose}}</span>
-    <span v-else-if="statusID == 2" class="tag is-warning">{{statusVerbose}}</span>
-    <span v-else class="tag is-danger">{{statusVerbose}}</span>
+    <span v-if="statusID == 0" class="tag is-black">Not Active</span>
+    <span v-else-if="statusID == 1" class="tag is-success">Active</span>
+    <span v-else-if="statusID == 2" class="tag is-warning">Waiting for User</span>
+    <span v-else class="tag is-danger">Closed</span>
   </div>
 </template>
 

@@ -39,7 +39,29 @@ router
             if (err) res.status(500).send("Failed to post comment");
             else res.send({result: result})
         })
-
     })
-
+    .get('/methods/disownTicket/:id', (req, res) => {
+        db.con.query(helpdesk.disownTicket(req.params.id), function(err, result) {
+            if (err) res.status(500).send("Failed to disown ticket");
+            else res.send({result:result})
+        })
+    })
+    .get('/methods/waitForUser/:id', (req, res) => {
+        db.con.query(helpdesk.waitForUser(req.params.id), function(err,result) {
+            if (err) res.status(500).send("Failed to set waitForUser");
+            else res.send({result: result})
+        })
+    })
+    .get('/methods/closeTicket/:id', (req, res) => {
+        db.con.query(helpdesk.closeTicket(req.params.id), function(err,result) {
+            if (err) res.status(500).send("Failed to close ticket");
+            else res.send({result: result})
+        })
+    })
+    .get('/methods/reopenTicket/:id', (req, res) => {
+        db.con.query(helpdesk.reopenTicket(req.params.id), function(err,result) {
+            if (err) res.status(500).send("Failed to close ticket");
+            else res.send({result: result})
+        })
+    })
 module.exports = router;
