@@ -15,5 +15,12 @@ router
             else res.status(200).send({result:result})
         });
     })
+    .post('/methods/userAutocompleteSearch', (req, res) => {
+        searchQuery = admin.findTopFiveUsers(req.body.Name)
+        db.con.query(searchQuery, function(err,result) {
+            if (err) res.status(500).send({result:[], message:"error"});
+            else res.status(200).send({result:result})
+        });
+    })
 
 module.exports = router;
